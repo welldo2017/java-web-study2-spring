@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--使用Spring的IoC容器，实际上就是通过类似XML这样的配置文件，把我们自己的Bean的依赖关系描述出来，
+    然后让容器来创建并装配Bean。
+    一旦容器初始化完毕，我们就直接从容器中获取Bean使用它们。-->
+
+
+    <!--使用XML配置的优点是所有的Bean都能一目了然地列出来，并通过配置注入能直观地看到每个Bean的依赖。
+    它的缺点是写起来非常繁琐，每增加一个组件，就必须把新的Bean配置到XML中。-->
+
+
+    <!-- 告诉Spring的IoC容器应该如何创建并组装Bean： -->
+    <!-- bean的顺序不重要,Spring根据依赖关系会自动正确初始化。-->
+    <!--id是唯一标识, 通过ref注入另外一个bean, 也就是说,对象数据类型,通过ref注入-->
+    <bean id="userService" class="com.welldo.spring1.service.UserService">
+        <property name="mailService" ref="mailService" />
+    </bean>
+
+    <bean id="mailService" class="com.welldo.spring1.service.MailService" />
+
+    <!--如果注入的不是Bean，而是boolean、int、String这样的数据类型，则通过value注入-->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test" />
+        <property name="username" value="root" />
+        <property name="password" value="password" />
+        <property name="maximumPoolSize" value="10" />
+        <property name="autoCommit" value="true" />
+    </bean>
+
+
+</beans>
