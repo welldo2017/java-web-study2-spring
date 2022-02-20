@@ -1,4 +1,4 @@
-package com.welldo.spring3txt;
+package com.welldo.spring3atxt;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,13 +18,10 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 @Configuration
 public class Main {
-    static ApplicationContext context = null;
 
-
-
-    @SuppressWarnings("resource")
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
+
         Resources appService = context.getBean(Resources.class);
         appService.printLogo();
     }

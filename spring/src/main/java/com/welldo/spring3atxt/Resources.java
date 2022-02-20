@@ -1,4 +1,4 @@
-package com.welldo.spring3txt;
+package com.welldo.spring3atxt;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,8 @@ public class Resources {
     @Value("1")
     private int version;
 
-    //注意:这里并不是读取真正的配置文件,而是读取txt等非配置类文件
+    //注意:它是以文本形式读进来的,不能自动转成kv形式,就好比txt
+    //对程序员来讲,还需要手动将文本转成kv,
 
     //注入Resource最常用的方式是通过classpath，即类似classpath:/logo.txt表示在classpath中搜索logo.txt文件，
     // 然后，我们直接调用Resource.getInputStream()就可以获取到输入流，避免了自己搜索文件的代码。
