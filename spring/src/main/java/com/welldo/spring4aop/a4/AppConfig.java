@@ -29,6 +29,7 @@ public class AppConfig {
         MailService mailService = context.getBean(MailService.class);
 
 
+        //todo 后面加注释
         //不加aop的情况下,一切正常
         //加上aop,再在本类加上 @EnableAspectJAutoProxy , 应该会得到 npe
         System.out.println(mailService.sendMail());
