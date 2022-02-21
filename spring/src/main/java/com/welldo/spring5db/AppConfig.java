@@ -72,7 +72,7 @@ public class AppConfig {
         config.setUsername(jdbcUsername);
         config.setPassword(jdbcPassword);
 
-        config.addDataSourceProperty("autoCommit", "true");
+        config.addDataSourceProperty("autoCommit", "true");//自动提交
         config.addDataSourceProperty("connectionTimeout", "5");
         config.addDataSourceProperty("idleTimeout", "60");
         return new HikariDataSource(config);
