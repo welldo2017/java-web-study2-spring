@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
     //执行UserService的每个public方法前执行 doAccessCheck()代码。
+    //第一个*是 返回值类型,第二个*是方法名, (..)表示不限参数个数
     @Before("execution(public * com.welldo.spring4aop.a3.service.UserService.*(..))")//不限返回值,不限参数个数
     public void doAccessCheck() {
         System.err.println("[Before] do access check...");
