@@ -24,7 +24,7 @@ public class UserService {
      * 然后,通过 application.xml, 告诉Spring的IoC容器应该如何创建并组装Bean：
      * 最后,查看 {@link Main}
      *
-     * todo 疑问1, 既然有了这一段,为何xml中还要重复定义一遍呢?
+     * 疑问1, 既然有了这一段,为何xml中还要重复定义一遍呢?
      * set（）方法，是需要被调用后，才能真正的注入属性。
      * xml中利用反射，也或者不是反射，完成了真正调用这个set方法，完成了属性的注入。
      */
@@ -53,26 +53,6 @@ public class UserService {
             }
         }
         throw new RuntimeException("----login failed.");
-    }
-    /**
-     * 注册
-     */
-    public User register(String email, String password, String name) {
-        users.forEach((user) -> {
-            if (user.getEmail().equalsIgnoreCase(email)) {
-                throw new RuntimeException("email exist.");
-            }
-        });
-        User user = new User(users
-                .stream()
-                .mapToLong(u -> u.getId())
-                .max()
-                .getAsLong() + 1,       //id属性
-                email, password, name   //其他属性
-        );
-        users.add(user);
-        mailService.sendRegistrationMail(user);
-        return user;
     }
 
 }

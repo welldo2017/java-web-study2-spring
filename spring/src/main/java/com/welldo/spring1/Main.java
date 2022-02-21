@@ -10,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 那么到底如何使用IoC容器？装配好的Bean又如何使用？
  *
  * author:welldo
- * date: 2022-01-05 13:19
+ * date: 2022-02-18 13:19
  */
 public class Main {
 
