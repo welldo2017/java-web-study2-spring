@@ -132,7 +132,9 @@ public class UserService {
     }
     public User signin(String email, String password) {
         @SuppressWarnings({ "deprecation", "unchecked" })
-        List<User> list = (List<User>) hibernateTemplate.find("FROM User WHERE email=? AND password=?", email,
+        List<User> list = (List<User>) hibernateTemplate.find(
+                "FROM User WHERE email=? AND password=?",
+                email,
                 password);
         return list.isEmpty() ? null : list.get(0);
     }

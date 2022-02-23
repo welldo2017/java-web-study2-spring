@@ -34,14 +34,14 @@ import java.util.Properties;
  * 这个RowMapper的作用就是把ResultSet的一行记录映射为Java Bean。
  *
  * 这种把关系数据库的表记录映射为Java对象的过程就是ORM：Object-Relational Mapping
- * 使用JdbcTemplate配合RowMapper可以看作是最原始的ORM。如果要实现更自动化的ORM，可以选择成熟的ORM框架，例如Hibernate。
- *
+ * 使用JdbcTemplate配合RowMapper可以看作是最原始的ORM。
+ * 如果要实现更自动化的ORM，可以选择成熟的ORM框架，例如Hibernate。 * 它是第一个被广泛使用的ORM框架
  *
  * 2.在Spring中集成Hibernate需要配置的Bean如下：
- * DataSource；
- * LocalSessionFactory；
- * HibernateTransactionManager；
- * HibernateTemplate（推荐）。
+ *      DataSource；
+ *      LocalSessionFactory；
+ *      HibernateTransactionManager；
+ *      HibernateTemplate（推荐）。
  *
  * author:welldo
  * date: 2022-02-22 14:15
