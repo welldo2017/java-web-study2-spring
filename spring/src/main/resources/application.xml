@@ -16,11 +16,11 @@
     <!-- 告诉Spring的IoC容器应该如何创建并组装Bean： -->
     <!-- bean的顺序不重要,Spring根据依赖关系会自动正确初始化。-->
     <!--id是唯一标识, 通过ref注入另外一个bean, 也就是说,对象数据类型,通过ref注入-->
-    <bean id="userService" class="com.welldo.spring1.service.UserService">
+    <bean id="userService" class="com.welldo.spring.spring1.service.UserService">
         <property name="mailService" ref="mailService" />
     </bean>
 
-    <bean id="mailService" class="com.welldo.spring1.service.MailService" />
+    <bean id="mailService" class="com.welldo.spring.spring1.service.MailService" />
 
     <!--如果注入的不是Bean，而是boolean、int、String这样的数据类型，则通过value注入-->
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
