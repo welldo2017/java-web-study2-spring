@@ -26,13 +26,13 @@ import javax.sql.DataSource;
  * 从而实现ORM。
  *
  * 1.Spring提供的JdbcTemplate，它和ORM框架相比，主要有几点差别：
- * 查询后需要手动提供Mapper实例以便把ResultSet的每一行变为Java对象；
+ * 查询后需要手动提供Mapper实例，以便把ResultSet的每一行变为Java对象；
  * 增删改操作所需的参数列表，需要手动传入，即把User实例变为[user.id, user.name, user.email]这样的列表，比较麻烦。
  *
  * 但是JdbcTemplate的优势在于它的确定性：即每次读取操作一定是数据库操作而不是缓存，所执行的SQL是完全确定的，
  * 缺点就是代码比较繁琐，构造INSERT INTO users VALUES (?,?,?)更是复杂。
  *
- * 2.所以，介于全自动ORM如Hibernate和手写全部如JdbcTemplate之间，还有一种半自动的ORM，
+ * 2.所以，介于全自动ORM(如Hibernate),和手写全部（如JdbcTemplate）之间，还有一种半自动的ORM，
  * 它只负责把ResultSet自动映射到Java Bean，或者自动填充Java Bean参数，但仍需自己写出SQL。
  * MyBatis就是这样一种半自动化ORM框架。
  *

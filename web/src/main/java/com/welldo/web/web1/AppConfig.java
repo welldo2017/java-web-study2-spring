@@ -6,11 +6,6 @@ import com.mitchellbosecke.pebble.spring.extension.SpringExtension;
 import com.mitchellbosecke.pebble.spring.servlet.PebbleViewResolver;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.catalina.Context;
-import org.apache.catalina.WebResourceRoot;
-import org.apache.catalina.startup.Tomcat;
-import org.apache.catalina.webresources.DirResourceSet;
-import org.apache.catalina.webresources.StandardRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +23,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
-import java.io.File;
 
 /**
  * 0. 注意，这个工程的打包方式是war包。
@@ -70,7 +64,8 @@ import java.io.File;
  *     ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
  * }
  *
- * 问题来了，现在是Web应用程序，而Web应用程序总是由Servlet容器创建，那么，Spring容器应该由谁创建？在什么时候创建？
+ * 但是，现在是Web应用程序，而Web应用程序总是由Servlet容器（如tomcat）创建，
+ * 那么，Spring容器应该由谁创建？在什么时候创建？
  * 请查看 web.xml
  *
  *
@@ -93,7 +88,7 @@ import java.io.File;
 @EnableWebMvc // 启用Spring MVC
 @EnableTransactionManagement
 @PropertySource("classpath:/jdbc.properties")
-public class Main {
+public class AppConfig {
 
     // -- jdbc configuration --------------------------------------------------
     @Value("${jdbc.url}")
@@ -107,25 +102,6 @@ public class Main {
 
 
 
-    //账密 3@qq.com / 111222
-    public static void main(String[] args) throws Exception {
-        Tomcat tomcat = new Tomcat();
-        tomcat.setPort(Integer.getInteger("port", 8080));
-        tomcat.getConnector();
-        Context ctx = tomcat.addWebapp("", new File("web/src/main/webapp").getAbsolutePath());
-        WebResourceRoot resources = new StandardRoot(ctx);
-        resources.addPreResources(
-                new DirResourceSet(
-                        resources,
-                        "/WEB-INF/classes",
-                        new File("web/target/classes").getAbsolutePath(),
-                        "/"
-                )
-        );
-        ctx.setResources(resources);
-        tomcat.start();
-        tomcat.getServer().await();
-    }
 
     /**
      * 6.1
@@ -191,8 +167,4 @@ public class Main {
     PlatformTransactionManager createTxManager(@Autowired DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
-
-
-
-
 }

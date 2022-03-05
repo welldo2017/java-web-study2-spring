@@ -6,7 +6,10 @@
 	<display-name>Archetype Created Web Application</display-name>
 
 	<!--
-	介绍一种最简单的启动Spring容器的方式。
+	在Web应用中启动Spring容器有很多种方法，可以通过Listener启动，也可以通过Servlet启动，
+	可以使用XML配置，也可以使用注解配置。
+
+	这里，介绍一种最简单的启动Spring容器的方式。
 	第一步，我们在web.xml中配置Spring MVC提供的DispatcherServlet：
 	-->
 	<servlet>
@@ -22,7 +25,7 @@
 		<!--2. contextConfigLocation 表示 配置类的位置，指向 main 的完整类名-->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>com.welldo.web.web1.Main</param-value>
+			<param-value>com.welldo.web.web1.AppConfig</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
