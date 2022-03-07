@@ -16,8 +16,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -61,7 +63,7 @@ import javax.sql.DataSource;
  *
  * 8. * 如果是普通的Java应用程序，我们通过main()方法可以很简单地创建一个Spring容器的实例：
  * public static void main(String[] args) {
- *     ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+ *     ApplicationContext context = new AnnotationConfigApplicationContext(A4_Interceptor.class);
  * }
  *
  * 但是，现在是Web应用程序，而Web应用程序总是由Servlet容器（如tomcat）创建，
@@ -77,7 +79,13 @@ import javax.sql.DataSource;
  * DispatcherServlet创建IoC容器并自动注册到ServletContext中。
  * 启动后，浏览器发出的HTTP请求全部由DispatcherServlet接收，并根据配置转发到指定Controller的指定方法处理。
  *
- *
+ * ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+ * │ ┌─────────────────────┐ │ │    ┌───────────┐
+ *   │  DispatcherServlet  │─ ─ ─ ─>│Controllers│   │
+ * │ └─────────────────────┘ │ │    └───────────┘
+ *                                                  │
+ * │    Servlet Container    │ │  Spring Container
+ *  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
  *
  *
  * author:welldo
@@ -110,9 +118,18 @@ public class AppConfig {
      * 目的是让Spring MVC自动处理静态文件，并且映射路径为/static/**。
      */
     @Bean
-    WebMvcConfigurer createWebMvcConfigurer() {
+    WebMvcConfigurer createWebMvcConfigurer(@Autowired HandlerInterceptor[] interceptors) {
         //匿名内部类
         return new WebMvcConfigurer() {
+
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                for (HandlerInterceptor interceptor : interceptors) {
+                    registry.addInterceptor(interceptor);
+                }
+            }
+
+
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 registry.addResourceHandler("/static/**").addResourceLocations("/static/");
