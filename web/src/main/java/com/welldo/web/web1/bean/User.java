@@ -1,5 +1,7 @@
 package com.welldo.web.web1.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -59,6 +61,9 @@ public class User {
 		this.email = email;
 	}
 
+	//如果要允许输入password，但不允许输出password，
+	// 即在JSON序列化和反序列化时，允许写属性，禁用读属性，可以更精细地控制如下：
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}
