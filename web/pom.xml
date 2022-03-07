@@ -108,6 +108,14 @@
             <version>${hsqldb.version}</version>
         </dependency>
 
+
+        <!--jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+
         <!-- 嵌入式Tomcat -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
