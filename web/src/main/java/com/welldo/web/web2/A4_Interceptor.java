@@ -77,7 +77,8 @@ package com.welldo.web.web2;
  * Interceptor的拦截范围其实就是Controller方法，它实际上就相当于基于AOP的方法拦截
  * 因为Interceptor只拦截Controller方法，所以要注意，返回ModelAndView并渲染后，后续处理就脱离了Interceptor的拦截范围。
  *
- * 3.最后，要让拦截器生效，我们在WebMvcConfigurer中注册所有的Interceptor：
+ * 3.最后，要让拦截器生效，
+ * 我们在 {@link com.welldo.web.web1.AppConfig}的 WebMvcConfigurer（）方法中中注册所有的Interceptor：
  * {@link com.welldo.web.web1.filter.LoggerInterceptor}
  *
  *
