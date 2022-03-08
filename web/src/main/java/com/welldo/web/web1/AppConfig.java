@@ -8,12 +8,10 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -91,11 +89,16 @@ import javax.sql.DataSource;
  * author:welldo
  * date: 2022-03-03 14:15
  */
+
+
 @Configuration
 @ComponentScan
 @EnableWebMvc // 启用Spring MVC
 @EnableTransactionManagement
-@PropertySource("classpath:/jdbc.properties")
+@EnableScheduling
+// @PropertySource("classpath:/jdbc.properties")
+@PropertySource({"classpath:/jdbc.properties","classpath:/task.properties" })
+@EnableMBeanExport //告诉Spring，注册MBean
 public class AppConfig {
 
     // -- jdbc configuration --------------------------------------------------
